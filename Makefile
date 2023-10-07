@@ -12,11 +12,11 @@ ifeq (${current_docker_context},pi3three)
      suffix=prod
      project_name=wifi-connect
   endif
-else ifeq (${current_docker_context},nuc1-lan)
+else [ifeq (${current_docker_context},nuc1-lan)] || [ifeq (${current_docker_context},pi3two)]
   suffix=dev
   project_name=wifi-connect-dev
 else
-  $(error "Current docker context[=$(current_docker_context)] is not pi3three or nuc1-lan")
+  $(error "Current docker context[=$(current_docker_context)] is not pi3three, pi3two or nuc1-lan")
 endif
 
 compose_override=docker-compose.$(suffix).yml
