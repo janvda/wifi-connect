@@ -1,7 +1,7 @@
 DOCKERHUB_ID:=janvda
 SERVICE_NAME:=wifi-connect
-SERVICE_VERSION:=1.0.0
-ARCHITECTURES=linux/arm/v7,linux/arm64/v8,linux/amd64
+SERVICE_VERSION:=armv7-1.0.0
+ARCHITECTURES=linux/arm/v7 #,linux/arm64/v8,linux/amd64
 
 # BUILD_DOCKER_CONTEXT specifies the docker context of the build machine
 BUILD_DOCKER_CONTEXT=colima
