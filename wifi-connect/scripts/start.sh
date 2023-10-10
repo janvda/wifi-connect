@@ -25,7 +25,7 @@ iwgetid -r
 if [ $? -eq 0 ]; then
     printf 'Skipping WiFi Connect\n'
 else
-    printf 'Starting WiFi Connect\n'
+    printf 'Starting WiFi Connect with \n'
     ./wifi-connect
 fi
 

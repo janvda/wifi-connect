@@ -1,0 +1,5 @@
+version: "3.9"
+services:
+  wifi-connect:
+   environment:
+      - PORTAL_SSID=wifi-connect-nuc1-dev
