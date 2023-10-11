@@ -39,6 +39,6 @@ sudo nmcli dev wifi connect <SSID> password "<PASSWORD>"
 # list (wifi) connections
 nmcli c
 
-# disconnect wifi - the <CONNECTION_NAME> is returned by `nmclid d``
-sudo nmcli con down id "<CONNECTION NAME>"
+# forget a wifi connection
+sudo nmcli connection delete "<CONNECTION NAME>"
 ```

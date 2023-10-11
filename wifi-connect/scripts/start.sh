@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
 
+printf "$(date +'%Y-%m-%d %H:%M:%S'): Starting script:$0\n"
+
 export DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
 
 # Optional step - it takes couple of seconds (or longer) to establish a WiFi connection
 # sometimes. In this case, following checks will fail and wifi-connect
 # will be launched even if the device will be able to connect to a WiFi network.
 # If this is your case, you can wait for a while and then check for the connection.
-# sleep 15
+printf "$(date +'%Y-%m-%d %H:%M:%S'): sleeping 15 seconds...\n"
+sleep 15
 
 # Choose a condition for running WiFi Connect according to your use case:
 
@@ -20,14 +23,15 @@ export DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
 # wget --spider http://google.com 2>&1
 
 # 4. Is there an active WiFi connection?
+printf "$(date +'%Y-%m-%d %H:%M:%S'): Check if there is an active WiFi connection\n"
 iwgetid -r
 
 if [ $? -eq 0 ]; then
-    printf 'Skipping WiFi Connect\n'
+    printf "$(date +'%Y-%m-%d %H:%M:%S'): Skipping WiFi Connect\n"
 else
-    printf 'Starting WiFi Connect with \n'
+    printf "$(date +'%Y-%m-%d %H:%M:%S'): Starting WiFi Connect\n"
     ./wifi-connect
 fi
 
-# Start your application here.
+printf "$(date +'%Y-%m-%d %H:%M:%S'): sleep infinity\n"
 sleep infinity

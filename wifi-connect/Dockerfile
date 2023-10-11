@@ -7,13 +7,13 @@ RUN apt-get update && \
 WORKDIR /usr/src/app
 
 # possible values for BALENA_ARCH: armv7hf amd64 aarch64
-RUN ARCH=`uname -m` && \
-    if   [ "$ARCH" == "x86_64" ]; then BALENA_ARCH=amd64; \
-    elif [ "$ARCH" == "armv7l" ]; then BALENA_ARCH=armv7hf;\
-    else                               BALENA_ARCH=aarch64; fi && \
-    wget https://github.com/balena-os/wifi-connect/releases/download/v4.4.4/wifi-connect-v4.4.4-linux-${BALENA_ARCH}.tar.gz \
+RUN ARCH=`uname -m` \
+    && if [ "$ARCH" = "x86_64" ];  then BALENA_ARCH="amd64";   fi \
+    && if [ "$ARCH" = "armv7l" ];  then BALENA_ARCH="armv7hf"; fi \
+    && if [ "$ARCH" = "aarch64" ]; then BALENA_ARCH="aarch64"; fi \
+    && wget https://github.com/balena-os/wifi-connect/releases/download/v4.4.4/wifi-connect-v4.4.4-linux-${BALENA_ARCH}.tar.gz \
     && tar -xvf wifi-connect-*.tar.gz \
-    && rm wifi-connect-*.tar.gz
+    && rm wifi-connect-*.tar.gz 
 
 COPY scripts/start.sh .
 

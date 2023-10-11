@@ -1,1 +1,4 @@
 version: "3.9"
+services:
+  wifi-connect:
+    image: janvda/wifi-connect:1.0.1
