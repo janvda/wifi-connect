@@ -2,6 +2,43 @@
 
 > Easy WiFi setup for Linux devices from your mobile phone or laptop
 
+**GitHub repository:** [janvda/wifi-connect](https://github.com/janvda/wifi-connect)
+
+**docker hub images:** [janvda/wifi-connect](https://hub.docker.com/repository/docker/janvda/wifi-connect/general)  (build for amd64, arm/v7 and arm64)
+
+## Change History
+
+* version 1.0.1 : Use this version.
+
+## docker-compose example
+
+Here below a docker-compose example.
+
+[Command Line Arguments](./docs/command-line-arguments.md) describes the list of environment variables you can specify in `environment` section of your docker compose fil.
+
+```yaml
+version: "3.9"
+services:
+  wifi-connect:
+    image: janvda/wifi-connect:1.0.1
+    network_mode: "host"
+    privileged: true     # this is needed for dnsmasq
+    restart: unless-stopped
+    volumes:
+     # this is needed for nmcli
+     - /run/dbus/system_bus_socket:/run/dbus/system_bus_socket
+     # this is needed for wifi-connect executable
+     - /run/dbus/system_bus_socket:/host/run/dbus/system_bus_socket
+    environment:
+      - PORTAL_SSID=wifi-connect
+      # 80 is the default port you can use this environment variable to specify a different port.
+      - PORTAL_LISTENING_PORT=80
+      - PORTAL_GATEWAY=192.168.50.1
+      - PORTAL_DHCP_RANGE=192.168.50.2,192.168.50.254
+```
+
+
+## Original README description
 WiFi Connect is a utility for dynamically setting the WiFi configuration on a Linux device via a captive portal. WiFi credentials are specified by connecting with a mobile phone or laptop to the access point that WiFi Connect creates.
 
 [![Current Release](https://img.shields.io/github/release/balena-io/wifi-connect.svg?style=flat-square)](https://github.com/balena-io/wifi-connect/releases/latest)

@@ -1,6 +1,4 @@
 version: "3.9"
-volumes:
-  playlists:
 services:
   wifi-connect:
     container_name: wifi-connect

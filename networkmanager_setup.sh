@@ -1,6 +1,9 @@
 #!/bin/bash
 
-# nohup this script
+# Use this script at your own risk
+
+# run this script using nohup
+# sudo nohup ./networkmanager_setup.sh <ssid> <password>
 
 set -v
 
@@ -11,7 +14,7 @@ fi
 
 if [ "$#" -ne 2 ]; then
     echo "ERROR: illegal number of parameters"
-    echo "usage $0 <ssid> <password>"
+    echo "usage: sudo nohup ./networkmanager_setup.sh <ssid> <password>"
     exit 1
 fi
 
