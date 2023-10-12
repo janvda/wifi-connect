@@ -6,15 +6,51 @@
 
 **docker hub images:** [janvda/wifi-connect](https://hub.docker.com/repository/docker/janvda/wifi-connect/general)  (build for amd64, arm/v7 and arm64)
 
-## Change History
+## Prerequisites
 
-* version 1.0.1 : Use this version.
+[Network manager](https://networkmanager.dev/docs/) must be running on the host and not dhcpcd.
+
+The images are tested with network manager version 1.14.6 (= version packaged in the debian buster repository).  So it might not work if you are using a more recent version.  In that case I would suggest to update the [Dockerfile](./Dockerfile) by specifying a more recent [debian image](https://hub.docker.com/_/debian) and rebuild the docker image.
+
+
+If Network Manager is not installed on your host you can:
+
+* configure network manager as specified in [Network setup required for wifi-connect](https://github.com/janvda/pi3two#network-setup-required-for-wifi-connect) OR
+* run the [networkmanager_setup.sh](networkmanager_setup.sh) script as specified in below section
+
+### Use script:  `networkmanager_setup.sh`
+
+
+Here below the steps to install and setup the network manager on the host using the script.
+
+**Use the script at your own risk, this script comes with no warranty.
+I would recommend not to use the script and attach a monitor and keyboard to your device and manually enter all those commands !**
+
+1. copy script [networkmanager_setup.sh](../networkmanager_setup.sh) to host directory /tmp
+
+```shell
+# An example of using scp
+scp networkmanager_setup.sh pi@pi3three:/tmp
+```
+
+2. ssh to host and goto `/tmp` directory
+3. make script executable:
+
+```shell
+chmod a+x ./networkmanager_setup.sh
+```
+
+4. launch the script using nohup specifying ssid and password of the Wifi network.  
+
+```shell
+sudo nohup ./networkmanager_setup <ssid> <password>
+```
 
 ## docker-compose example
 
-Here below a docker-compose example.
+Here below a docker-compose example that is working where the host is running debian buster or ubuntu 20.04
 
-[Command Line Arguments](./docs/command-line-arguments.md) describes the list of environment variables you can specify in `environment` section of your docker compose fil.
+[Command Line Arguments](./docs/command-line-arguments.md) describes the list of environment variables you can specify in `environment` section of your docker compose file.
 
 ```yaml
 version: "3.9"
@@ -37,8 +73,32 @@ services:
       - PORTAL_DHCP_RANGE=192.168.50.2,192.168.50.254
 ```
 
+## Interesting commands to test
 
-## Original README description
+```shell
+# nmcli device status
+nmcli d
+
+# list all wifi access points with ssid
+nmcli d wifi list
+
+# connect to wifi <SSID> with password <PASSWORD>
+sudo nmcli dev wifi connect <SSID> password "<PASSWORD>"
+
+# list (wifi) connections
+nmcli c
+
+# forget a wifi connection - this can be used to test wifi-connect.
+sudo nmcli connection delete "<CONNECTION NAME>"
+```
+
+
+## Change History
+
+* version 1.0.1 : Use this version.
+
+## Here below Original BALENA README description
+
 WiFi Connect is a utility for dynamically setting the WiFi configuration on a Linux device via a captive portal. WiFi credentials are specified by connecting with a mobile phone or laptop to the access point that WiFi Connect creates.
 
 [![Current Release](https://img.shields.io/github/release/balena-io/wifi-connect.svg?style=flat-square)](https://github.com/balena-io/wifi-connect/releases/latest)
