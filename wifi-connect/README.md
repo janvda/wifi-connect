@@ -2,6 +2,8 @@
 
 > Easy WiFi setup for Linux devices from your mobile phone or laptop
 
+WiFi Connect is a utility for dynamically setting the WiFi configuration on a Linux device via a captive portal. WiFi credentials are specified by connecting with a mobile phone or laptop to the access point that WiFi Connect creates.
+
 **GitHub repository:** [janvda/wifi-connect](https://github.com/janvda/wifi-connect)
 
 **docker hub images:** [janvda/wifi-connect](https://hub.docker.com/repository/docker/janvda/wifi-connect/general)  (build for amd64, arm/v7 and arm64)
@@ -98,8 +100,6 @@ sudo nmcli connection delete "<CONNECTION NAME>"
 * version 1.0.1 : Use this version.
 
 ## Here below Original BALENA README description
-
-WiFi Connect is a utility for dynamically setting the WiFi configuration on a Linux device via a captive portal. WiFi credentials are specified by connecting with a mobile phone or laptop to the access point that WiFi Connect creates.
 
 [![Current Release](https://img.shields.io/github/release/balena-io/wifi-connect.svg?style=flat-square)](https://github.com/balena-io/wifi-connect/releases/latest)
 [![CircleCI status](https://img.shields.io/circleci/project/github/balena-io/wifi-connect.svg?style=flat-square)](https://circleci.com/gh/balena-io/wifi-connect)
